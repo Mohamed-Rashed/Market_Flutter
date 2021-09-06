@@ -25,6 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   get:
+  dots_indicator: ^2.0.0
 
 dev_dependencies:
   flutter_test:

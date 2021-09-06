@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:market/core/utlis/size_config.dart';
 import 'package:market/features/onBoarding/presentation/on_boarding_view.dart';
 
 class SplashBody extends StatefulWidget {
@@ -30,6 +31,7 @@ class _SplashBodyState extends State<SplashBody>
   }
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
       child: Column(
         children: [

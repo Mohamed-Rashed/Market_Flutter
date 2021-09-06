@@ -1,10 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:market/core/utlis/size_config.dart';
+import 'package:market/core/widgets/custom_buttons.dart';
+import 'package:market/features/onBoarding/presentation/widget/custom_indicator.dart';
+import 'package:market/features/onBoarding/presentation/widget/custom_page_view.dart';
 
-class OnBoardingViewBody extends StatelessWidget {
+class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({Key key}) : super(key: key);
 
   @override
+  _OnBoardingViewBodyState createState() => _OnBoardingViewBodyState();
+}
+
+class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
+  PageController pageController;
+  @override
+  void initState() {
+    pageController = PageController(
+      initialPage: 0,
+    )..addListener(() {
+      setState(() {
+
+      });
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return Container();
+    return Stack(
+      children: [
+        CustomPageView(pageController: pageController,),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: SizeConfig.defaultSize * 24,
+          child: CustomIndicator(
+            dotIndex: pageController.hasClients ? pageController.page : 0,
+          ),
+        ),
+        Visibility(
+          visible: pageController.hasClients ? (pageController.page == 2 ? false : true) : true,
+          child: Positioned(
+            top: SizeConfig.defaultSize * 10,
+            right: 32,
+            child: Text(
+              'Skip',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 14,
+                color: const Color(0xff898989),
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+        ),
+        Positioned(
+          left: SizeConfig.defaultSize * 10,
+          right: SizeConfig.defaultSize * 10,
+          bottom: SizeConfig.defaultSize * 10,
+          child: CustomGeneralButton(
+            text: pageController.hasClients ? (pageController.page == 2 ? 'Get Started': 'Next') : 'Next',
+          ),
+        )
+      ],
+    );
   }
 }
