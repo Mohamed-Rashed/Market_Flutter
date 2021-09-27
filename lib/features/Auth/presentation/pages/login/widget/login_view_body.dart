@@ -5,6 +5,7 @@ import 'package:market/core/constant.dart';
 import 'package:market/core/utlis/size_config.dart';
 import 'package:market/core/widgets/custom_buttons.dart';
 import 'package:market/core/widgets/space_widget.dart';
+import 'package:market/features/Auth/presentation/pages/complete_information/complete_information_view.dart';
 
 
 class LoginViewBody extends StatelessWidget {
@@ -66,9 +67,9 @@ class LoginViewBody extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: CustomButtonWithIcon(
                   onTap: () {
-                    /*Get.to(() => CompleteInformationView(),
+                    Get.to(() => CompleteInformationView(),
                         duration: Duration(milliseconds: 500),
-                        transition: Transition.rightToLeft);*/
+                        transition: Transition.rightToLeft);
                   },
                   color: Color(0xFF4267B2),
                   iconData: FontAwesomeIcons.facebookF,
