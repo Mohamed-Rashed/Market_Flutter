@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:market/core/utlis/size_config.dart';
 import 'package:market/core/widgets/custom_buttons.dart';
+import 'package:market/features/Auth/presentation/pages/login/login_view.dart';
 import 'package:market/features/onBoarding/presentation/widget/custom_indicator.dart';
 import 'package:market/features/onBoarding/presentation/widget/custom_page_view.dart';
 
@@ -18,17 +20,18 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
     pageController = PageController(
       initialPage: 0,
     )..addListener(() {
-      setState(() {
-
+        setState(() {});
       });
-    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomPageView(pageController: pageController,),
+        CustomPageView(
+          pageController: pageController,
+        ),
         Positioned(
           left: 0,
           right: 0,
@@ -38,7 +41,9 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           ),
         ),
         Visibility(
-          visible: pageController.hasClients ? (pageController.page == 2 ? false : true) : true,
+          visible: pageController.hasClients
+              ? (pageController.page == 2 ? false : true)
+              : true,
           child: Positioned(
             top: SizeConfig.defaultSize * 10,
             right: 32,
@@ -58,7 +63,20 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           right: SizeConfig.defaultSize * 10,
           bottom: SizeConfig.defaultSize * 10,
           child: CustomGeneralButton(
-            text: pageController.hasClients ? (pageController.page == 2 ? 'Get Started': 'Next') : 'Next',
+            onTap: (){
+              if(pageController.page < 2){
+                pageController.nextPage(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeIn
+                );
+              }
+              else{
+                Get.to(() => LoginView() , transition: Transition.rightToLeft, duration: Duration(milliseconds: 500));
+              }
+            },
+            text: pageController.hasClients
+                ? (pageController.page == 2 ? 'Get Started' : 'Next')
+                : 'Next',
           ),
         )
       ],
